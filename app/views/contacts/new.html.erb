@@ -1,11 +1,22 @@
 <h1>New Contact</h1>
 
+<% if @contact.errors.any? %>
+<h3> Please fix these errors:</h3>
+  <ul>
+    <% @contact.errors.full_messages.each do |message| %>
+      <li><%= message %>
+    <% end %>
+  </ul>
+<% end %>
+
 <form action="/contacts" method="post">
   <label for="contact_name">Name</label>
-  <input id="contact_name" name="contact[name]" type="text" placeholder="Name">
+  <input id="contact_name" name="contact[name]" type="text" value="<%= @contact.name %>" placeholder="Name...">
   <label for="contact_phone">Phone</label>
-  <input id="contact_phone" name="contact[phone]" type="text">
+  <input id="contact_phone" name="contact[phone]" type="text" value="<%= @contact.phone%>" placeholder="999-999-9999">
   <label for="contact_email">Email</label>
-  <input id="contact_email" name="contact[email]" type="text">
+  <input id="contact_email" name="contact[email]" type="text" value="<%= @contact.email %>" placeholder="anyone@here.com">
   <button>Create Contact</button>
 </form>
+
+<p><a href="/contacts"> Cancel and return to contact listing</a></p>
